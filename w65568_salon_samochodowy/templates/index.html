@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Car Dealership</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('add_car') }}">Add Car</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Car Dealership</h1>
+        
+        <div class="search-sort">
+            <form method="get" action="{{ url_for('index') }}">
+                <input type="text" name="search" placeholder="Search by name" value="{{ search or '' }}">
+                <select name="sort_by" onchange="this.form.submit()">
+                    <option value="">Sort by</option>
+                    <option value="name" {% if sort_by == 'name' %}selected{% endif %}>Name</option>
+                    <option value="brand" {% if sort_by == 'brand' %}selected{% endif %}>Brand</option>
+                    <option value="year" {% if sort_by == 'year' %}selected{% endif %}>Year</option>
+                    <option value="type" {% if sort_by == 'type' %}selected{% endif %}>Type</option>
+                </select>
+            </form>
+        </div>
+        
+        <ul>
+            {% for car in cars %}
+                <li>
+                    <a href="{{ url_for('view_car', id=car.id) }}">{{ car.name }}</a>
+                    <button onclick="deleteCar({{ car.id }})">Delete</button>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

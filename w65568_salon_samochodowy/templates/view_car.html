@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>View Car</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('add_car') }}">Add Car</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>{{ car.name }}</h1>
+        <p><strong>Brand:</strong> {{ car.brand }}</p>
+        <p><strong>Year:</strong> {{ car.year }}</p>
+        <p><strong>Type:</strong> {{ car.type }}</p>
+        <a href="{{ url_for('index') }}">Back to Car Dealership</a>
+    </div>
+</body>
+</html>
